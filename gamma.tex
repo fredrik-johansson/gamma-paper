@@ -29,11 +29,11 @@
 %\usepackage[margin=1.2in]{geometry}
 
 
-\usepackage[
-        paperwidth=\textwidth+3cm,
-        paperheight=\textheight+4cm,
-        text={\textwidth,\textheight} % without this line, errors occur
-    ]{geometry}
+%\usepackage[
+%        paperwidth=\textwidth+3cm,
+%        paperheight=\textheight+4cm,
+%        text={\textwidth,\textheight} % without this line, errors occur
+%    ]{geometry}
 
 
 %\usepackage{caption} 
@@ -2973,13 +2973,28 @@ I_0(x) K_0(x) \sim \frac{1}{2x} \sum_{k=0}^{\infty} \frac{[(2k)!]^3}{(k!)^4 8^{2
 \end{equation}
 
 A convenient error bound is available: if the first two series are summed up to the $k = K-1$ term
-inclusive and the third series is summed up to $k = 2K-1$ inclusive,
+inclusive and the third series is summed up to $k = 2N-1$ inclusive,
 where $K \ge \alpha N + 1$, $\alpha = 3 / W_0(3/e) \approx 4.97063$,
 then the error in \eqref{eq:brentmcmillan} is bounded by $24 e^{-8N}$~\cite{BrentJohansson2013bound}.
-We need about $\tfrac{1}{2} \alpha \log(2) p \approx 1.72269 p$ terms in total for $p$-bit accuracy.
+We need about $\tfrac{1}{4} (\alpha+1) \log(2) p \approx 1.03463 p$ terms in total for $p$-bit accuracy.
 This actually overestimates the true cost
 because the first two series can share some of the
 computations and the third series only needs to be computed with $p/2$-bit precision.
+
+%def euler1(p):
+%    mp.prec = p
+%    N = int(0.125 * p * log(2))
+%    K = int(4.97063 * N)
+%    x = mpf(2*N)
+%    S = sum(harmonic(k)/fac(k)**2 * (x/2)**(2*k) for k in range(K))
+%    I = sum(1/fac(k)**2 * (x/2)**(2*k) for k in range(K))
+%    IK = 1/(2*x) * sum(fac(2*k)**3 / (fac(k)**4 * (8*x)**(2*k)) for k in range(2*N))
+%    print("terms", K + K + 2 * N)
+%    K = IK/I
+%    t = S/I - IK/I**2 - log(N)
+%    nprint(abs(t - euler))
+
+% euler1(1000)
 
 Used in combination with recurrence relations and Gauss's digamma theorem
 \begin{equation}
